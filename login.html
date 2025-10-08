@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - StudyMate</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>
+<body>
+
+    <div class="container login-page">
+        <div class="login-box">
+            <div class="login-header">
+                <div class="logo">
+                    <i data-feather="book-open"></i> <!-- StudyMate Logo -->
+                </div>
+                <h1>Selamat Datang di StudyMate</h1>
+                <p>Aplikasi untuk meningkatkan produktivitas belajarmu.</p>
+            </div>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="username">Username atau Email</label>
+                    <input type="text" id="username" name="username" placeholder="Masukkan username atau email Anda" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Masukkan password Anda" required>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+                <div class="login-footer">
+                    <a href="forgot_password.html">Lupa Password?</a>
+                    <span>|</span>
+                    <a href="register.html">Buat Akun Baru</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        feather.replace(); // Initialize Feather icons
+    </script>
+</body>
+</html>

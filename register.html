@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Akun Baru - StudyMate</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>
+<body>
+
+    <div class="container login-page"> <!-- Using login-page styling -->
+        <div class="login-box">
+            <div class="login-header">
+                <div class="logo">
+                    <i data-feather="book-open"></i> <!-- StudyMate Logo -->
+                </div>
+                <h1>Daftar Akun Baru</h1>
+                <p>Bergabunglah dengan StudyMate untuk belajar lebih efektif.</p>
+            </div>
+            <form id="registerForm">
+                <div class="input-group">
+                    <label for="regUsername">Username</label>
+                    <input type="text" id="regUsername" name="regUsername" placeholder="Pilih username Anda" required>
+                </div>
+                <div class="input-group">
+                    <label for="regEmail">Email</label> <!-- New Email Input -->
+                    <input type="email" id="regEmail" name="regEmail" placeholder="Masukkan email Anda" required>
+                </div>
+                <div class="input-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" name="regPassword" placeholder="Buat password" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirmPassword">Konfirmasi Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Ulangi password Anda" required>
+                </div>
+                <button type="submit" class="btn-primary">Daftar</button>
+                <div class="login-footer">
+                    Sudah punya akun? <a href="login.html">Login di sini</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        feather.replace(); // Initialize Feather icons
+    </script>
+</body>
+</html>

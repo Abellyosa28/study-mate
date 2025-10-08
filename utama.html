@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - StudyMate</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Feather Icons for a clean look -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            <span>StudyMate</span>
+        </div>
+        <nav>
+            <span class="user-greeting">Halo, <strong id="currentUserDisplay"></strong>!</span>
+            <button id="themeToggle" class="icon-btn" title="Toggle Tema Gelap/Terang">
+                <i data-feather="moon"></i> <!-- Moon icon for dark mode toggle -->
+            </button>
+            <a href="#" id="logoutButton">Keluar</a>
+        </nav>
+    </header>
+
+    <main class="container dashboard-page">
+        <div class="dashboard-nav">
+            <a href="#" class="tab-item active" data-tab="dashboard">Dashboard</a>
+            <a href="#" class="tab-item" data-tab="history">Histori Aktivitas</a>
+        </div>
+
+        <!-- Dashboard Tab Content -->
+        <div id="dashboard" class="tab-content active">
+            <div class="summary-cards-grid">
+                <!-- Row 1: Metrik Cepat -->
+                <div class="summary-card" id="tasksSummaryCard">
+                    <h4>Tugas</h4>
+                    <p class="card-value large-value red" id="tasksDueSoon">0 Tugas</p>
+                </div>
+                <div class="summary-card" id="pomodoroSummaryCard">
+                    <h4>Sesi Pomodoro Hari Ini</h4>
+                    <p class="card-value large-value primary" id="pomodorosToday">0 Sesi</p>
+                </div>
+                <div class="summary-card" id="notesSummaryCard">
+                    <h4>Catatan Ringkasan Dibuat</h4>
+                    <p class="card-value large-value green" id="notesCount">0 Catatan</p>
+                </div>
+
+                <!-- Row 2: Ringkasan Progres -->
+                <div class="summary-card wide-card">
+                    <div class="card-icon">📚</div>
+                    <h4>Tugas Belum Selesai</h4>
+                    <p class="card-value red" id="incompleteTasksCount">0</p>
+                </div>
+                <div class="summary-card wide-card">
+                    <div class="card-icon">✅</div>
+                    <h4>Tugas Selesai</h4>
+                    <p class="card-value green" id="completedTasksCount">0</p>
+                </div>
+                <div class="summary-card wide-card">
+                    <div class="card-icon">🏆</div>
+                    <h4>Kuis Diselesaikan</h4>
+                    <p class="card-value primary" id="quizzesCompletedCount">0</p>
+                </div>
+            </div>
+
+            <!-- Bagian Aksi Cepat / Fitur Utama -->
+            <section class="quick-actions">
+                <h2>Aksi Cepat</h2>
+                <div class="quick-action-grid">
+                    <div class="card action-card" id="addScheduleCard">
+                        <i data-feather="calendar" class="action-icon"></i>
+                        <h3>Tambah Jadwal/Tugas</h3>
+                        <p>Atur deadline dan prioritas belajarmu.</p>
+                        <button class="btn-primary btn-small">Tambah Sekarang</button>
+                    </div>
+                    <div class="card action-card" id="startPomodoroCard">
+                        <i data-feather="clock" class="action-icon"></i>
+                        <h3>Mulai Sesi Belajar</h3>
+                        <p>Fokus dengan teknik Pomodoro Timer.</p>
+                        <button class="btn-primary btn-small">Mulai Timer</button>
+                    </div>
+                    <div class="card action-card" id="writeNotesCard">
+                        <i data-feather="edit" class="action-icon"></i>
+                        <h3>Tulis Catatan Ringkasan</h3>
+                        <p>Buat ringkasan atau upload materi penting.</p>
+                        <button class="btn-primary btn-small">Tulis Catatan</button>
+                    </div>
+                    <div class="card action-card" id="doQuizCard">
+                        <i data-feather="help-circle" class="action-icon"></i>
+                        <h3>Kerjakan Soal Latihan</h3>
+                        <p>Uji pemahamanmu dengan kuis interaktif.</p>
+                        <button class="btn-primary btn-small">Mulai Kuis</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bagian Detail Tugas (seperti sebelumnya, tapi mungkin disembunyikan atau diakses via 'Tambah Jadwal') -->
+            <section id="fullScheduleSection" class="dashboard-section" style="display: none;">
+                <h2>Jadwal & Progres Tugas</h2>
+                 <div class="card-content">
+                    <form id="tugasForm" class="input-form">
+                        <input type="text" id="namaTugas" placeholder="Nama Tugas/Kuliah" required>
+                        <input type="date" id="deadlineTugas" required>
+                        <button type="submit" class="btn-primary btn-small">Tambah Tugas</button>
+                    </form>
+                    <div class="progress-tracker">
+                        <div class="progress-column" id="belumDikerjakanCol">
+                            <h4>Belum Dikerjakan</h4>
+                            <ul id="belumDikerjakanList" class="task-list dropzone">
+                                <!-- Tugas baru akan ditambahkan di sini oleh JavaScript -->
+                            </ul>
+                        </div>
+                        <div class="progress-column" id="prosesCol">
+                            <h4>Proses</h4>
+                            <ul id="prosesList" class="task-list dropzone">
+                                 <!-- Tugas dalam proses akan ditambahkan di sini -->
+                            </ul>
+                        </div>
+                        <div class="progress-column" id="selesaiCol">
+                            <h4>Selesai</h4>
+                            <ul id="selesaiList" class="task-list dropzone">
+                                 <!-- Tugas selesai akan ditambahkan di sini -->
+                            </ul>
+                        </div>
+                    </div>
+                 </div>
+            </section>
+
+            <!-- Bagian Detail Pomodoro -->
+            <section id="fullPomodoroSection" class="dashboard-section" style="display: none;">
+                <h2>Alarm Belajar (Pomodoro)</h2>
+                <div class="card-content">
+                    <div class="alarm-box">
+                        <div id="timer-display">25:00</div>
+                        <div class="alarm-controls">
+                            <button id="startTimer" class="btn-primary">Mulai</button>
+                            <button id="resetTimer" class="btn-secondary">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+             <!-- Bagian Detail Catatan Ringkasan -->
+            <section id="fullNotesSection" class="dashboard-section" style="display: none;">
+                <h2>Catatan Ringkasan Belajar</h2>
+                <div class="card-content">
+                    <textarea id="catatan" placeholder="Tulis atau paste ringkasan belajarmu di sini..."></textarea>
+                    <div class="catatan-actions">
+                        <button class="btn-primary">Simpan Catatan</button>
+                        <button id="viewCatatan" class="btn-secondary">Muat Catatan Tersimpan</button>
+                        <input type="file" id="uploadRingkasan" accept=".txt,.md" hidden>
+                        <label for="uploadRingkasan" class="btn-secondary">Upload File</label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bagian Detail Soal Latihan -->
+            <section id="fullQuizSection" class="dashboard-section" style="display: none;">
+                 <h2>Soal Latihan</h2>
+                 <div class="card-content">
+                     <form id="quizForm">
+                         <div class="question">
+                             <p><strong>1. Apa kepanjangan dari HTML?</strong></p>
+                             <label><input type="radio" name="q1" value="a"> HyperText Markup Language</label>
+                             <label><input type="radio" name="q1" value="b"> High-level Text Machine Language</label>
+                             <label><input type="radio" name="q1" value="c"> Hyperlink and Text Markup Language</label>
+                         </div>
+                         <div class="question">
+                             <p><strong>2. Jelaskan secara singkat apa fungsi CSS!</strong></p>
+                             <textarea name="q2" placeholder="Jawaban Anda..."></textarea>
+                         </div>
+                         <button type="submit" class="btn-primary">Kirim Jawaban</button>
+                     </form>
+                     <div id="score-result" class="score-display"></div>
+                 </div>
+            </section>
+        </div> <!-- End dashboard tab content -->
+
+        <!-- History Tab Content (Initially hidden) -->
+        <div id="history" class="tab-content">
+            <h2>Histori Aktivitas Belajar</h2>
+            <div class="card-content">
+                <p>Fitur histori aktivitas akan menampilkan log dari tugas yang diselesaikan, sesi pomodoro, dan update catatan.</p>
+                <ul id="activityHistoryList">
+                    <!-- Activity history items will be loaded here by JavaScript -->
+                    <li><i data-feather="check-circle"></i> Tugas 'Membuat Laporan HTML' Selesai (2023-10-26)</li>
+                    <li><i data-feather="play-circle"></i> Sesi Pomodoro dimulai (10:00)</li>
+                    <li><i data-feather="file-text"></i> Catatan 'Ringkasan Algoritma' diperbarui (2023-10-25)</li>
+                </ul>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        feather.replace(); // Initialize Feather icons
+    </script>
+</body>
+</html>
